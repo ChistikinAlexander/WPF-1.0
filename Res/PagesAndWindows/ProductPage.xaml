@@ -1,0 +1,187 @@
+﻿<Page x:Class="WPF_1._0.Res.PagesAndWindows.ProductPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_1._0.Res.PagesAndWindows"
+      mc:Ignorable="d" 
+      d:DesignHeight="520" d:DesignWidth="800"
+      Title="ProductPage">
+    <Page.Resources>
+        <ControlTemplate x:Key="StyleButtons" TargetType="Button">
+            <Grid Name="btn" Height="60"  Margin="20,0,0,0">
+                <Border>
+                    <Grid>
+                        <Label Content="{TemplateBinding Content}"
+                               Background="Transparent" FontSize="23"
+                               VerticalAlignment="Center">
+                            <Label.Style>
+                                <Style TargetType="Label">
+                                    <Setter Property="Foreground" Value="#FF9D9999"></Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=btn}"
+                                                     Value="True">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource
+                                            Mode=FindAncestor,AncestorType={x:Type Button}},Path= IsPressed}" Value="true">
+                                            <Setter Property="Foreground" Value="#FF9D9999"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource
+                                            Mode=FindAncestor,AncestorType={x:Type Button}},Path= IsFocused}" Value="true">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                        <Label Content="{TemplateBinding Content}"
+                           Background="Transparent" Margin="-3,0,0,0"
+                           VerticalAlignment="Center" FontSize="23" FontWeight="Bold">
+                            <Label.Style>
+                                <Style TargetType="Label">
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource
+                                            Mode=FindAncestor,AncestorType={x:Type Button}},Path= IsFocused}" Value="true">
+                                            <DataTrigger.Setters>
+                                                <Setter Property="Effect">
+                                                    <Setter.Value>
+                                                        <BlurEffect Radius="25"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger.Setters>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                    </Grid>
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource
+                                            Mode=FindAncestor,AncestorType={x:Type Button}},Path= IsPressed}" Value="true">
+                                    <Setter Property="Margin" Value="0,3,0,0"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+        <DataTemplate x:Key="HeaderTemplate">
+            <TextBlock Text="{Binding}" TextWrapping="Wrap"  TextAlignment="Center"/>
+        </DataTemplate>
+        <LinearGradientBrush x:Key="HeaderBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF20344C"/>
+            <GradientStop Color="#FF1C222C" Offset="1"/>
+            <GradientStop Color="#FF182637" Offset="0.522"/>
+        </LinearGradientBrush>
+        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#FF1C222C"/>
+            <Setter Property="Background" Value="{StaticResource HeaderBrush}" />
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#FF9D9999"/>
+            <Setter Property="ContentTemplate" Value="{StaticResource HeaderTemplate}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                        <Grid  Background="{StaticResource HeaderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DataGridCellStyle" TargetType="DataGridCell">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="#FFCAC4C4"/>
+            <Setter Property="Background" Value="{StaticResource HeaderBrush}"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="460"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DataGrid  HeadersVisibility="Column" 
+                   CellStyle="{StaticResource DataGridCellStyle}" 
+                   Background="#FF182637" x:Name="DataGridProduct" 
+                   IsReadOnly="True" AutoGenerateColumns="False"
+                   MinRowHeight="36" GridLinesVisibility="Horizontal">
+            <DataGrid.Resources>
+                <SolidColorBrush 
+                    x:Key="{x:Static SystemColors.HighlightBrushKey}" 
+                   Color="Black"/>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Id"
+                                    Binding="{Binding Id}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" 
+                                    Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment"
+                                    Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="3*" Header="Продукт"
+                                    Binding="{Binding ProductName}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping"
+                                    Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="3*" Header="Описание"
+                                    Binding="{Binding Description}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping"
+                                    Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="auto" Header="Цена"
+                                    Binding="{Binding Price}"/>
+                <DataGridTextColumn Width="auto" Header="Кол-во"
+                                    Binding="{Binding Count}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping"
+                                    Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment"
+                                    Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="auto" Header="Мера"
+                                    Binding="{Binding Measure}"/>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Template="{StaticResource ResourceKey=StyleButtons}"
+                                    Content="Изменить" Name="BtnEdit"
+                                    Click="BtnEdit_Click">
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" >
+            <Button Name="AddBtn" Click="AddBtn_Click"
+                    Focusable="False" Template="{StaticResource ResourceKey=StyleButtons}" Content="Добавить" />
+            <Button Name="DelBtn" Click="DelBtn_Click"
+                    Focusable="False" Template="{StaticResource ResourceKey=StyleButtons}" Content="Удалить" />
+        </StackPanel>
+    </Grid>
+</Page>

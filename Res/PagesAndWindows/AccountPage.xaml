@@ -1,0 +1,45 @@
+﻿<Page x:Class="WPF_1._0.Res.PagesAndWindows.AccountPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_1._0.Res.PagesAndWindows"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AccountPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Аккаунт" Foreground="#FF5596ED" 
+                   Grid.Column="0" Grid.ColumnSpan="3" FontSize="24" Margin="0,10,0,0"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+
+        <TextBlock TextWrapping="Wrap" Text="Имя пользователя: " Foreground="#FF5596ED" 
+                   Grid.Column="0" FontSize="24" Margin="0,50,0,0"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <TextBlock Text="Логин: " Foreground="#FF5596ED" 
+                   Grid.Column="0" FontSize="24" Margin="0,100,0,0"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <TextBlock Text="Пароль: " Foreground="#FF5596ED" 
+                   Grid.Column="0" FontSize="24" Margin="0,150,0,0"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <TextBlock x:Name="UserNameTxb" Text="{Binding CurrentUser.Username, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Foreground="#FF5596ED" 
+                   Grid.Column="1" FontSize="24" Margin="0,50,0,0"
+                 HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock x:Name="LoginTxb" Text="{Binding CurrentUser.Login, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Foreground="#FF5596ED" 
+                   Grid.Column="1" FontSize="24" Margin="0,100,0,0"
+                 HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock x:Name="PasswordTxb" Text="{Binding CurrentUser.Password, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" Foreground="#FF5596ED" 
+                   Grid.Column="1" FontSize="24" Margin="0,150,0,0"
+                 HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    </Grid>
+</Page>
